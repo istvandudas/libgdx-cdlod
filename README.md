@@ -116,8 +116,7 @@ This gives you a full 16‑bit range while still using a standard 8‑bit RG tex
 In the shader, you reconstruct the height like this:
 
 ```glsl
-float height = r * 256.0 + g;
-height /= 65535.0; // normalize if needed
+float height = r * 65536.0 + g * 256.0;
 ```
 This approach avoids banding, preserves fine terrain detail, and works reliably across all LibGDX backends.
 
