@@ -35,9 +35,9 @@ sourcesJar {
 }
 
 dependencies {
-    implementation "com.badlogicgames.gdx:gdx:1.12.0"
-    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:1.12.0"
-    implementation "com.badlogicgames.gdx:gdx-platform:1.12.0:natives-desktop"
+    implementation "com.badlogicgames.gdx:gdx:$libgdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$libgdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-desktop"
 }
 
 test {

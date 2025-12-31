@@ -85,6 +85,7 @@ Only patches visible in the camera frustum are evaluated. Combined with the quad
 
 ## Current implementation
 Apologies it’s still tailored to my personal preferences.
+- Used Java 21 and Gradle 9. The project doesn’t rely on any Java 21‑specific features, but if you plan to use an earlier Java version, you may need to downgrade Gradle accordingly.
 - The terrain material supports addon (modifier) modules
   - A basic Day/Night Cycle addon is already included
 - The build is configured to publish artifacts to the **local Maven repository**, and it is intended to be used alongside the main project.
