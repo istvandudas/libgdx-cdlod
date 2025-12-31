@@ -1,0 +1,45 @@
+plugins {
+    id("java")
+    id("io.freefair.lombok") version "9.1.0"
+    id("maven-publish")
+}
+
+group = 'org.cdlod'
+version = '0.1.0'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+java {
+    withSourcesJar()
+}
+
+sourcesJar {
+    exclude {
+        sourceSets.main.allSource.contains it.file
+    }
+    from delombok
+}
+
+dependencies {
+    implementation "com.badlogicgames.gdx:gdx:1.12.0"
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:1.12.0"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.12.0:natives-desktop"
+}
+
+test {
+    useJUnitPlatform()
+}
