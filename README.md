@@ -1,5 +1,6 @@
 <!-- TOC -->
 * [CDLOD Terrain Surface Rendering for LibGDX.](#cdlod-terrain-surface-rendering-for-libgdx)
+  * [How to Use](#how-to-use)
   * [CDLOD Terrain – Technical Summary](#cdlod-terrain--technical-summary)
     * [Key Concepts](#key-concepts)
       * [Quadtree‑based LOD selection](#quadtreebased-lod-selection-)
@@ -10,7 +11,6 @@
       * [View‑dependent refinement](#viewdependent-refinement)
   * [Why CDLOD?](#why-cdlod)
   * [Typical Pipeline](#typical-pipeline)
-  * [Current implementation](#current-implementation)
   * [Upcoming Work](#upcoming-work)
   * [Future Enhancements (Planned)](#future-enhancements-planned)
   * [Lesson learns](#lesson-learns)
@@ -18,13 +18,27 @@
     * [Making the heightmap linear (just in case)](#making-the-heightmap-linear-just-in-case)
     * [Packing height into the RG channels](#packing-height-into-the-rg-channels)
 <!-- TOC -->
+
 # CDLOD Terrain Surface Rendering for LibGDX.
 This terrain system is inspired by [Filip Strugar's CDLOD paper](https://github.com/fstrugar/CDLOD/tree/master) from 2010.
 - The amazing terrain height, diffuse, and normal textures are sourced from [MotionForgePictures](https://www.motionforgepictures.com/height-maps/).
-- The illustrations come from the companion project, [libgdx-cdlod-demo](https://github.com/istvandudas/libgdx-cdlod-demo) project.
+- The illustrations come from the companion project, [libgdx-cdlod-demo](https://github.com/istvandudas/libgdx-cdlod-demo) 
+project.
   - It’s a great place to start if you want to dive in and try things out.
 
-I also noticed that there are very few easy‑to‑use, shader‑based terrain solutions available for Java game development, so this project aims to fill that gap.
+I also noticed that there are very few easy‑to‑use, shader‑based terrain solutions available for Java game development,
+so this project aims to fill that gap.
+
+## How to Use
+- This is a standard Java library. It was developed using Java 21 and Gradle 9, but it does not rely on any 
+Java 21‑specific features. If you intend to use an earlier Java version, you may need to downgrade Gradle accordingly.
+- The library is not yet available through a public Maven repository.
+- Since it is a regular Java library, you can integrate it into your project however you prefer. The recommended 
+approach is to clone the project, build it, and publish it to your local Maven repository. After that, you can reference
+it as a normal dependency. (Don’t forget to add _mavenLocal()_ to the _repositories_ section of your build.gradle.)
+- You may also want to explore the companion repository, libgdx-cdlod-demo, for practical usage examples.
+- The terrain material currently supports addons (modifiers), though this system may be restructured in the future.
+  - A basic Day/Night Cycle addon is already included.
 
 ## CDLOD Terrain – Technical Summary
 CDLOD (Continuous Distance‑Dependent Level of Detail) is a GPU‑friendly terrain rendering technique designed for large, heightmap‑based worlds. It provides smooth, continuous LOD transitions without cracks, popping, or heavy CPU overhead. Unlike traditional chunked LOD systems, CDLOD uses a quadtree of regular grids and a morphing scheme that ensures stable geometry across LOD boundaries.
@@ -82,13 +96,6 @@ Only patches visible in the camera frustum are evaluated. Combined with the quad
   - Compute morph ranges for each node.
 - Render selected nodes using a shared grid mesh.
 - Vertex shader samples heightmap and applies morphing.
-
-## Current implementation
-Apologies it’s still tailored to my personal preferences.
-- Used Java 21 and Gradle 9. The project doesn’t rely on any Java 21‑specific features, but if you plan to use an earlier Java version, you may need to downgrade Gradle accordingly.
-- The terrain material supports addon (modifier) modules
-  - A basic Day/Night Cycle addon is already included
-- The build is configured to publish artifacts to the **local Maven repository**, and it is intended to be used alongside the main project.
 
 ## Upcoming Work
 - Add support for general world‑offset handling
